@@ -9,7 +9,7 @@ export interface iState {
 const preloadedState = {
     robots: [],
 };
-export const stroe = configureStore({
+export const store = configureStore({
     reducer: {
         robots: robotReducer,
     },

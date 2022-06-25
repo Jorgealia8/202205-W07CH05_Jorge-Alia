@@ -1,4 +1,4 @@
-export function OfferPage() {
+export function HomePage() {
     const template = (
         <>
             <main>
@@ -10,4 +10,4 @@ export function OfferPage() {
     return template;
 }
 
-export default OfferPage;
+export default HomePage;
