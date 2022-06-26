@@ -17,7 +17,7 @@ describe('Given the component Header', () => {
                     <Header options={options} />
                 </BrowserRouter>
             );
-            const result = screen.getByText(/Lista/i);
+            const result = screen.getByText(/Bienvenido/i);
             expect(result).toBeInTheDocument();
         });
     });
