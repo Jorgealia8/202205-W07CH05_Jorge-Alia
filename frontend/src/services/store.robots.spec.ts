@@ -47,6 +47,7 @@ describe('Given HttpStoreRobots', () => {
                     speed: 2,
                     endurance: 6,
                     creationDate: '01-03-2021',
+                    favorite: false,
                 };
                 global.fetch = jest.fn().mockResolvedValue({
                     json: jest.fn().mockResolvedValue({
@@ -56,6 +57,7 @@ describe('Given HttpStoreRobots', () => {
                         speed: 2,
                         endurance: 6,
                         creationDate: '01-03-2021',
+                        favorite: false,
                     }),
                 });
                 const result = await new HttpStoreRobots().setRobot(robot);
@@ -73,6 +75,7 @@ describe('Given HttpStoreRobots', () => {
                     speed: 2,
                     endurance: 6,
                     creationDate: '01-03-2021',
+                    favorite: false,
                 };
                 global.fetch = jest.fn().mockResolvedValue({
                     json: jest.fn().mockResolvedValue({
@@ -82,6 +85,7 @@ describe('Given HttpStoreRobots', () => {
                         speed: 2,
                         endurance: 6,
                         creationDate: '01-03-2021',
+                        favorite: false,
                     }),
                 });
                 const result = await new HttpStoreRobots().updateRobot(robot);

@@ -10,6 +10,7 @@ export interface iRobots {
     speed: number;
     endurance: number;
     creationDate: string;
+    favorite: boolean;
 }
 
 const robotSchema = new mongoose.Schema({
@@ -28,6 +29,7 @@ const robotSchema = new mongoose.Schema({
         max: 10,
     },
     creationDate: mongoose.SchemaTypes.String,
+    favorite: { type: mongoose.SchemaTypes.Boolean, default: false },
 });
 
 export const Robot = mongoose.model('Robot', robotSchema);

@@ -19,6 +19,7 @@ const mockRobots: Array<iRobot> = [
         speed: 2,
         endurance: 6,
         creationDate: '01-03-2021',
+        favorite: false,
     },
     {
         id: '62b5e16081f6e06e050a07f0',
@@ -27,6 +28,7 @@ const mockRobots: Array<iRobot> = [
         speed: 7,
         endurance: 5,
         creationDate: '12-08-2020',
+        favorite: false,
     },
 ];
 
