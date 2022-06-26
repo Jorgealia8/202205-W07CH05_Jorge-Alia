@@ -11,6 +11,7 @@ describe('Given robotReducer', () => {
         speed: 4,
         endurance: 9,
         creationDate: '12-03-2016',
+        favorite: false,
     };
     const mockRobot2: iRobot = {
         id: '3',
@@ -19,6 +20,7 @@ describe('Given robotReducer', () => {
         speed: 7,
         endurance: 2,
         creationDate: '20-08-2026',
+        favorite: false,
     };
     describe('When calling it whit action load with an array of Robot s', () => {
         test('Then it should return a new state witch the Products in the action payload', () => {

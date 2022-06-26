@@ -18,9 +18,11 @@ function App() {
     }, [apiRobots, dispatcher]);
 
     const HomePage = React.lazy(() => import('../../pages/homePage'));
+    const FavPage = React.lazy(() => import('../../pages/favPage'));
 
     const options: aMenuItems = [
         { path: '', label: 'Home', page: <HomePage /> },
+        { path: 'favorites', label: 'Favorites', page: <FavPage /> },
     ];
 
     return (

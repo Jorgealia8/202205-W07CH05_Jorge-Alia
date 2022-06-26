@@ -5,4 +5,5 @@ export interface iRobot {
     speed: number;
     endurance: number;
     creationDate: string;
+    favorite: boolean;
 }
