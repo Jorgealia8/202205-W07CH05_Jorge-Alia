@@ -3,6 +3,7 @@ import morgan from 'morgan';
 import cors from 'cors';
 import { routerHome } from './router/home.router.js';
 import { robotRouter } from './router/robots.router.js';
+import { userRouter } from './router/user.router.js';
 
 export const app = express();
 
@@ -12,6 +13,7 @@ app.use(cors());
 
 app.use('/', routerHome);
 app.use('/robots', robotRouter);
+app.use('/users', userRouter);
 
 app.use((error: Error, req: Request, resp: Response, next: NextFunction) => {
     req;

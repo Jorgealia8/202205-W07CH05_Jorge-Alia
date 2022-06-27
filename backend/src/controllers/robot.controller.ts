@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { Model } from 'mongoose';
-import { iRobots } from '../models/robots.model';
-import { MongooseController } from './controller';
+import { iRobots } from '../models/robots.model.js';
+import { MongooseController } from './controller.js';
 import { User } from '../models/user.model.js';
 
 export class RobotController<T> extends MongooseController<T> {
@@ -13,7 +13,7 @@ export class RobotController<T> extends MongooseController<T> {
         req;
         resp.setHeader('Content-type', 'application/json');
         resp.send(
-            await this.model.find().populate('responsible', {
+            await this.model.find().populate('pilot', {
                 robots: 0,
             })
         );
@@ -26,17 +26,17 @@ export class RobotController<T> extends MongooseController<T> {
     ) => {
         try {
             // Crear nueva tarea (titulo, resposible (id))
-            const newRobot = await this.model.create(req.body);
+            const newTask = await this.model.create(req.body);
             // Añadir tarea al array de tareas del usuario (responsible)
-            const user = await User.findById(req.body.responsible);
+            const user = await User.findById(req.body.pilot);
             if (!user) {
                 throw new Error('User not found');
             }
-            user.robots = [...(user.robots as Array<iRobots>), newRobot.id];
+            user.robots = [...(user.robots as Array<iRobots>), newTask.id];
             user.save();
             resp.setHeader('Content-type', 'application/json');
             resp.status(201);
-            resp.send(JSON.stringify(newRobot));
+            resp.send(JSON.stringify(newTask));
         } catch (error) {
             next(error);
         }

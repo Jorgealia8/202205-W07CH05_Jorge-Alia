@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import { MongooseController } from '../controllers/controller.js';
+import { RobotController } from '../controllers/robot.controller.js';
 import { Robot } from '../models/robots.model.js';
 
-export const robotController = new MongooseController(Robot);
+export const robotController = new RobotController(Robot);
 export const robotRouter = Router();
 
 robotRouter.get('/', robotController.getAllController);

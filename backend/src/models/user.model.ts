@@ -12,7 +12,7 @@ export interface iUser {
     id: string;
     name: string;
     email: string;
-    robots: Array<RelationField>;
+    robots: RelationField;
 }
 
 const userSchema = new mongoose.Schema({
