@@ -13,7 +13,7 @@ jest.mock('react-redux', () => ({
 
 const mockRobots: Array<iRobot> = [
     {
-        id: '62b5e12881f6e06e050a07ee',
+        _id: '62b5e12881f6e06e050a07ee',
         name: 'Alberto',
         image: 'prueb',
         speed: 2,
@@ -22,7 +22,7 @@ const mockRobots: Array<iRobot> = [
         favorite: false,
     },
     {
-        id: '62b5e16081f6e06e050a07f0',
+        _id: '62b5e16081f6e06e050a07f0',
         name: 'Ovidio',
         image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8yE1usE8zILZ12uD_bZXqJBQUofd3TLJUxg&usqp=CAU',
         speed: 7,

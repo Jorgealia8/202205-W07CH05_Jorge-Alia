@@ -5,7 +5,7 @@ import { AnyAction } from '@reduxjs/toolkit';
 
 describe('Given robotReducer', () => {
     const mockRobot: iRobot = {
-        id: '1',
+        _id: '1',
         name: 'Pedro',
         image: 'imageprobe',
         speed: 4,
@@ -14,7 +14,7 @@ describe('Given robotReducer', () => {
         favorite: false,
     };
     const mockRobot2: iRobot = {
-        id: '3',
+        _id: '3',
         name: 'Anastasio',
         image: 'imageprobe',
         speed: 7,
@@ -38,7 +38,7 @@ describe('Given robotReducer', () => {
         test('Receive a new state with the old state and the new product', () => {
             //Arrange
             const initialState: Array<iRobot> = [mockRobot];
-            const newRobot = { ...mockRobot, id: '34' };
+            const newRobot = { ...mockRobot, _id: '34' };
             const acctionToTest = action.addRobotAction(newRobot);
             //Act
             const newState = robotReducer(initialState, acctionToTest);
