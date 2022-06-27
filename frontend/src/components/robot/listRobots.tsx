@@ -6,7 +6,7 @@ export function RobotList({ robots }: { robots: Array<iRobot> }) {
     const template = (
         <ul className="robotsList">
             {robots.map((robot: iRobot) => (
-                <li key={robot.id}>
+                <li key={robot._id}>
                     <Robot robot={robot}></Robot>
                 </li>
             ))}

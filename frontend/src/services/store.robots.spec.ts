@@ -8,11 +8,11 @@ describe('Given HttpStoreRobots', () => {
                     json: jest.fn().mockResolvedValue([
                         // TODO cambiar por mock de personajes
                         {
-                            id: 1,
+                            _id: 1,
                             name: 'Prueba 1',
                         },
                         {
-                            id: 2,
+                            _id: 2,
                             name: 'Prueba 2',
                         },
                     ]),
@@ -25,23 +25,23 @@ describe('Given HttpStoreRobots', () => {
         describe('And we use method getRobot', () => {
             test('Then it should return a robot', async () => {
                 // arrange
-                const robotid = '1';
+                const robot_id = '1';
                 global.fetch = jest.fn().mockResolvedValue({
                     json: jest
                         .fn()
-                        .mockResolvedValue({ name: 'test', id: robotid }),
+                        .mockResolvedValue({ name: 'test', _id: robot_id }),
                 });
                 // act
-                const result = await new HttpStoreRobots().getRobot(robotid);
+                const result = await new HttpStoreRobots().getRobot(robot_id);
                 // assert
                 expect(fetch).toBeCalled();
-                expect(result.id).toBe('1');
+                expect(result._id).toBe('1');
             });
         });
         describe('And we use method setRobot', () => {
             test('should first', async () => {
                 const robot = {
-                    id: '62b5e12881f6e06e050a07ee',
+                    _id: '62b5e12881f6e06e050a07ee',
                     name: 'Alberto',
                     image: 'test',
                     speed: 2,
@@ -51,7 +51,7 @@ describe('Given HttpStoreRobots', () => {
                 };
                 global.fetch = jest.fn().mockResolvedValue({
                     json: jest.fn().mockResolvedValue({
-                        id: '62b5e12881f6e06e050a07ee',
+                        _id: '62b5e12881f6e06e050a07ee',
                         name: 'Alberto',
                         image: 'test',
                         speed: 2,
@@ -63,13 +63,13 @@ describe('Given HttpStoreRobots', () => {
                 const result = await new HttpStoreRobots().setRobot(robot);
                 // assert
                 expect(fetch).toBeCalled();
-                expect(result.id).toBe('62b5e12881f6e06e050a07ee');
+                expect(result._id).toBe('62b5e12881f6e06e050a07ee');
             });
         });
         describe('And we use method updateRobot', () => {
             test('Then it should return the updated robot', async () => {
                 const robot = {
-                    id: '62b5e12881f6e06e050a07ee',
+                    _id: '62b5e12881f6e06e050a07ee',
                     name: 'Alberto',
                     image: 'test',
                     speed: 2,
@@ -79,7 +79,7 @@ describe('Given HttpStoreRobots', () => {
                 };
                 global.fetch = jest.fn().mockResolvedValue({
                     json: jest.fn().mockResolvedValue({
-                        id: '62b5e12881f6e06e050a07ee',
+                        _id: '62b5e12881f6e06e050a07ee',
                         name: 'Alberto',
                         image: 'test',
                         speed: 2,
@@ -91,7 +91,7 @@ describe('Given HttpStoreRobots', () => {
                 const result = await new HttpStoreRobots().updateRobot(robot);
                 // assert
                 expect(fetch).toBeCalled();
-                expect(result.id).toBe('62b5e12881f6e06e050a07ee');
+                expect(result._id).toBe('62b5e12881f6e06e050a07ee');
             });
         });
         describe('And we use method deleteRobot', () => {

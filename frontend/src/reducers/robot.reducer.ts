@@ -15,11 +15,11 @@ export const robotReducer = createReducer(initialState, (builder) => {
         ])
         .addCase(action.updateRobotAction, (state, action) =>
             state.map((item) =>
-                item.id === action.payload.id ? action.payload : item
+                item._id === action.payload._id ? action.payload : item
             )
         )
         .addCase(action.deleteRobotAction, (state, action) =>
-            state.filter((item) => item.id !== action.payload.id)
+            state.filter((item) => item._id !== action.payload._id)
         )
         .addDefaultCase((state) => state);
 });

@@ -26,7 +26,7 @@ export class HttpStoreRobots {
     }
     updateRobot(robot: iRobot): Promise<Partial<iRobot>> {
         // PUT / PATCH
-        return fetch(this.url + `/${robot.id}`, {
+        return fetch(this.url + `/${robot._id}`, {
             method: 'PATCH',
             body: JSON.stringify(robot),
             headers: {
