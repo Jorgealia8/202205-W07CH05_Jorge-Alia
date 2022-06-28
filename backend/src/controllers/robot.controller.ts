@@ -26,17 +26,17 @@ export class RobotController<T> extends MongooseController<T> {
     ) => {
         try {
             // Crear nueva tarea (titulo, resposible (id))
-            const newTask = await this.model.create(req.body);
+            const newRobot = await this.model.create(req.body);
             // Añadir tarea al array de tareas del usuario (responsible)
             const user = await User.findById(req.body.pilot);
             if (!user) {
                 throw new Error('User not found');
             }
-            user.robots = [...(user.robots as Array<iRobots>), newTask.id];
+            user.robots = [...(user.robots as Array<iRobots>), newRobot.id];
             user.save();
             resp.setHeader('Content-type', 'application/json');
             resp.status(201);
-            resp.send(JSON.stringify(newTask));
+            resp.send(JSON.stringify(newRobot));
         } catch (error) {
             next(error);
         }

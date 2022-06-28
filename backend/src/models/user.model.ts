@@ -12,15 +12,16 @@ export interface iUser {
     id: string;
     name: string;
     email: string;
-    robots: RelationField;
+    robots: Array<RelationField>;
 }
 
 const userSchema = new mongoose.Schema({
     name: { type: mongoose.SchemaTypes.String, required: true },
     email: mongoose.SchemaTypes.String,
+    passwd: { type: mongoose.SchemaTypes.String, required: true },
     robots: [
         {
-            type: mongoose.Types.ObjectId,
+            type: mongoose.SchemaTypes.ObjectId,
             ref: 'Robot',
         },
     ],
@@ -29,6 +30,7 @@ const userSchema = new mongoose.Schema({
 userSchema.set('toJSON', {
     transform: (document, returnedObject) => {
         delete returnedObject.__v;
+        delete returnedObject.passwd;
     },
 });
 

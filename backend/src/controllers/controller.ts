@@ -11,7 +11,11 @@ export class MongooseController<T> {
         resp.send(await this.model.find());
     };
 
-    getController = async (req: Request, resp: Response) => {
+    getController = async (
+        req: Request,
+        resp: Response,
+        next: NextFunction
+    ) => {
         resp.setHeader('Content-type', 'application/json');
         console.log(req.params.id);
         const result = await this.model.findById(req.params.id);

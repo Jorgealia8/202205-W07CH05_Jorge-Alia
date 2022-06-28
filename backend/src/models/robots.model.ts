@@ -1,7 +1,9 @@
 import mongoose from 'mongoose';
 import { mongooseConnect, RelationField } from '../db/mongoose.js';
 
-await mongooseConnect();
+(async () => {
+    await mongooseConnect();
+})();
 
 export interface iRobots {
     id: string;
@@ -32,8 +34,14 @@ const robotSchema = new mongoose.Schema({
     creationDate: mongoose.SchemaTypes.String,
     favorite: { type: mongoose.SchemaTypes.Boolean, default: false },
     pilot: {
-        type: mongoose.Types.ObjectId,
+        type: mongoose.SchemaTypes.ObjectId,
         ref: 'User',
+    },
+});
+
+robotSchema.set('toJSON', {
+    transform: (document, returnedObject) => {
+        delete returnedObject.__v;
     },
 });
 
