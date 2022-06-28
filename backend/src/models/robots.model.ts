@@ -1,7 +1,9 @@
 import mongoose from 'mongoose';
-import { mongooseConnect } from '../db/mongoose.js';
+import { mongooseConnect, RelationField } from '../db/mongoose.js';
 
-await mongooseConnect();
+(async () => {
+    await mongooseConnect();
+})();
 
 export interface iRobots {
     id: string;
@@ -11,6 +13,7 @@ export interface iRobots {
     endurance: number;
     creationDate: string;
     favorite: boolean;
+    pilot: RelationField;
 }
 
 const robotSchema = new mongoose.Schema({
@@ -30,6 +33,16 @@ const robotSchema = new mongoose.Schema({
     },
     creationDate: mongoose.SchemaTypes.String,
     favorite: { type: mongoose.SchemaTypes.Boolean, default: false },
+    pilot: {
+        type: mongoose.SchemaTypes.ObjectId,
+        ref: 'User',
+    },
+});
+
+robotSchema.set('toJSON', {
+    transform: (document, returnedObject) => {
+        delete returnedObject.__v;
+    },
 });
 
 export const Robot = mongoose.model('Robot', robotSchema);

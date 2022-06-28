@@ -42,7 +42,11 @@ describe('Given a instantiated controller MongooseController', () => {
         test('Then res.end should be called', async () => {
             const mockResult = [{ test: 'test' }];
             (mockItem.findById as jest.Mock).mockResolvedValue(mockResult);
-            await newController.getController(req as Request, resp as Response);
+            await newController.getController(
+                req as Request,
+                resp as Response,
+                next as NextFunction
+            );
             expect(resp.end).toHaveBeenCalled();
         });
     });
@@ -50,7 +54,11 @@ describe('Given a instantiated controller MongooseController', () => {
         test('Then res.status toHaveBeenCalledWith 404 ', async () => {
             const mockResult = null;
             (mockItem.findById as jest.Mock).mockResolvedValue(mockResult);
-            await newController.getController(req as Request, resp as Response);
+            await newController.getController(
+                req as Request,
+                resp as Response,
+                next as NextFunction
+            );
             expect(resp.status).toHaveBeenCalledWith(404);
             expect(resp.end).toHaveBeenCalledWith(JSON.stringify({}));
         });
