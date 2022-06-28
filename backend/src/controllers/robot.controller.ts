@@ -25,9 +25,7 @@ export class RobotController<T> extends MongooseController<T> {
         next: NextFunction
     ) => {
         try {
-            // Crear nueva tarea (titulo, resposible (id))
             const newRobot = await this.model.create(req.body);
-            // Añadir tarea al array de tareas del usuario (responsible)
             const user = await User.findById(req.body.pilot);
             if (!user) {
                 throw new Error('User not found');
