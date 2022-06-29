@@ -7,7 +7,7 @@
     "scripts": {
         "start": "tsc --watch",
         "start:build": "cross-env PORT=3450 nodemon ./dist/index.js",
-        "test": "jest --watchAll --coverage"
+        "test": "cross-env jest --watchAll --coverage"
     },
     "author": "",
     "license": "ISC",

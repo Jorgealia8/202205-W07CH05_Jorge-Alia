@@ -9,9 +9,10 @@ import { mongooseConnect, RelationField } from '../db/mongoose.js';
 
 /* eslint-disable no-unused-vars */
 export interface iUser {
-    id: string;
+    id?: string;
     name: string;
     email: string;
+    passwd: string;
     robots: Array<RelationField>;
 }
 
@@ -30,7 +31,7 @@ const userSchema = new mongoose.Schema({
 userSchema.set('toJSON', {
     transform: (document, returnedObject) => {
         delete returnedObject.__v;
-        // delete returnedObject.passwd;
+        delete returnedObject.passwd;
     },
 });
 
