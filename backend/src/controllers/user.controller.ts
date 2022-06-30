@@ -26,7 +26,6 @@ export class UserController<T> extends MongooseController<T> {
         next: NextFunction
     ) => {
         resp.setHeader('Content-type', 'application/json');
-        console.log('Search for id:', req.params.id);
         let result;
         try {
             result = await this.model
