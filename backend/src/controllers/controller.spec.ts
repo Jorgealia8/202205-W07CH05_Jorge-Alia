@@ -24,18 +24,18 @@ describe('Given a instantiated controller MongooseController', () => {
         resp = {
             setHeader: jest.fn(),
             status: jest.fn(),
-            end: jest.fn(),
+            send: jest.fn(),
         };
     });
     describe('When method getAllController is called', () => {
-        test('Then res.end should be called', async () => {
+        test('Then res.send should be called', async () => {
             const mockResult = [{ test: 'test' }];
             (mockItem.find as jest.Mock).mockResolvedValue(mockResult);
             await newController.getAllController(
                 req as Request,
                 resp as Response
             );
-            expect(resp.end).toHaveBeenCalled();
+            expect(resp.send).toHaveBeenCalled();
         });
     });
     describe('When method getController is called', () => {
@@ -47,7 +47,7 @@ describe('Given a instantiated controller MongooseController', () => {
                 resp as Response,
                 next as NextFunction
             );
-            expect(resp.end).toHaveBeenCalled();
+            expect(resp.send).toHaveBeenCalled();
         });
     });
     describe('When method getController is called with a null', () => {
@@ -60,7 +60,7 @@ describe('Given a instantiated controller MongooseController', () => {
                 next as NextFunction
             );
             expect(resp.status).toHaveBeenCalledWith(404);
-            expect(resp.end).toHaveBeenCalledWith(JSON.stringify({}));
+            expect(resp.send).toHaveBeenCalledWith(JSON.stringify({}));
         });
     });
     describe('When method postController is called', () => {
@@ -72,7 +72,7 @@ describe('Given a instantiated controller MongooseController', () => {
                 resp as Response,
                 next as NextFunction
             );
-            expect(resp.end).toHaveBeenCalled();
+            expect(resp.send).toHaveBeenCalled();
         });
     });
 
@@ -90,7 +90,7 @@ describe('Given a instantiated controller MongooseController', () => {
     });
 
     describe('When method patchController is called', () => {
-        test('Then res.end should be called', async () => {
+        test('Then res.send should be called', async () => {
             const mockResult = [{ test: 'test' }];
             (mockItem.findByIdAndUpdate as jest.Mock).mockResolvedValue(
                 mockResult
@@ -99,11 +99,11 @@ describe('Given a instantiated controller MongooseController', () => {
                 req as Request,
                 resp as Response
             );
-            expect(resp.end).toHaveBeenCalled();
+            expect(resp.send).toHaveBeenCalled();
         });
     });
     describe('When method deleteController is called', () => {
-        test('Then res.end is called', async () => {
+        test('Then res.send is called', async () => {
             const mockResult = true;
             (mockItem.findByIdAndDelete as jest.Mock).mockResolvedValue(
                 mockResult
@@ -112,12 +112,12 @@ describe('Given a instantiated controller MongooseController', () => {
                 req as Request,
                 resp as Response
             );
-            expect(resp.end).toHaveBeenCalled();
+            expect(resp.send).toHaveBeenCalled();
         });
     });
     describe('When method deleteController is called', () => {
-        test('Then res.end is called', async () => {
-            const mockResult = false;
+        test('Then res.send is called', async () => {
+            const mockResult = null;
             (mockItem.findByIdAndDelete as jest.Mock).mockResolvedValue(
                 mockResult
             );
@@ -125,7 +125,7 @@ describe('Given a instantiated controller MongooseController', () => {
                 req as Request,
                 resp as Response
             );
-            expect(resp.end).toHaveBeenCalled();
+            expect(resp.send).toHaveBeenCalled();
         });
     });
 });

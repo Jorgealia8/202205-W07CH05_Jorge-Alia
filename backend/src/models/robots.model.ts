@@ -6,14 +6,14 @@ import { mongooseConnect, RelationField } from '../db/mongoose.js';
 })();
 
 export interface iRobots {
-    id: string;
+    id?: string;
     name: string;
     image: string;
     speed: number;
     endurance: number;
     creationDate: string;
     favorite: boolean;
-    pilot: RelationField;
+    pilot: RelationField | null;
 }
 
 const robotSchema = new mongoose.Schema({

@@ -1,11 +1,9 @@
 import { NextFunction, Request, Response } from 'express';
 import { HydratedDocument, Model } from 'mongoose';
-import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
-import dotenv from 'dotenv';
+
 import { MongooseController } from './controller.js';
+import * as aut from '../services/authorization.js';
 import { iTokenPayload } from '../interfaces/token.js';
-dotenv.config();
 
 export class UserController<T> extends MongooseController<T> {
     constructor(public model: Model<T>) {
@@ -28,7 +26,6 @@ export class UserController<T> extends MongooseController<T> {
         next: NextFunction
     ) => {
         resp.setHeader('Content-type', 'application/json');
-        console.log('Search for id:', req.params.id);
         let result;
         try {
             result = await this.model
@@ -55,7 +52,7 @@ export class UserController<T> extends MongooseController<T> {
     ) => {
         let newItem: HydratedDocument<any>;
         try {
-            req.body.passwd = await bcrypt.hash(req.body.passwd, 10); // encrytar
+            req.body.passwd = await aut.encrypt(req.body.passwd);
             newItem = await this.model.create(req.body);
         } catch (error) {
             next(error);
@@ -72,10 +69,7 @@ export class UserController<T> extends MongooseController<T> {
         next: NextFunction
     ) => {
         const findUser: any = await this.model.findOne({ name: req.body.name });
-        if (
-            !findUser ||
-            !(await bcrypt.compare(req.body.passwd, findUser.passwd))
-        ) {
+        if (!findUser || !aut.compare(req.body.passwd, findUser.passwd)) {
             const error = new Error('Invalid user or password');
             error.name = 'UserAuthorizationError';
             next(error);
@@ -85,7 +79,7 @@ export class UserController<T> extends MongooseController<T> {
             id: findUser.id,
             name: findUser.name,
         };
-        const token = jwt.sign(tokenPayLoad, process.env.SECRET as string);
+        const token = aut.createToken(tokenPayLoad);
         resp.setHeader('Content-type', 'application/json');
         resp.status(201);
         resp.send(JSON.stringify({ token, id: findUser.id }));
