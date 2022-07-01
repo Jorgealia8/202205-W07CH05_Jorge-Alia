@@ -48,7 +48,6 @@ export const initDB = async () => {
             passwd: await encrypt(item.passwd),
         }))
     );
-
     const users = await User.insertMany(aUsers);
     aRobots[0].pilot = users[0].id;
     aRobots[1].pilot = users[1].id;
@@ -59,12 +58,16 @@ export const initDB = async () => {
         const item = users[i];
         finalUsers[i] = await User.findByIdAndUpdate(
             item.id,
-
-            { ...item, robots: [robots[i].id] },
+            {
+                $set: { robots: [robots[i].id] },
+            },
             { new: true }
         );
     }
 
-    console.log(finalUsers);
     connect.disconnect();
+    return {
+        robots,
+        users: finalUsers,
+    };
 };
